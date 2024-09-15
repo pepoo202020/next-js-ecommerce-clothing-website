@@ -11,39 +11,39 @@ interface BANNERITEMSIF {
   image: string;
   header2: string;
 }
+const bannerItmes: BANNERITEMSIF[] = [
+  {
+    id: 1,
+    header1: "Jeans / Pants",
+    title: "Autumn Collection",
+    image: "/bannerSlide01.jpg",
+    header2: "durable / stylish / relaxed",
+  },
+  {
+    id: 2,
+    header1: "Hoodies / Sweatshirts",
+    title: "Winter Warmth Essentials",
+    header2: "cozy / layered / trendy",
+    image: "/bannerSlide02.jpg",
+  },
+  {
+    id: 3,
+    header1: "Dresses / Skirts",
+    title: "Spring Blossom Fashion",
+    header2: "floral / elegant / breezy",
+    image: "/bannerSlide03.jpg",
+  },
+  {
+    id: 4,
+    header1: "Jackets / Coats",
+    title: "Rainy Day Specials",
+    header2: "waterproof / warm / modern",
+    image: "/bannerSlide04.jpg",
+  },
+];
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const bannerItmes: BANNERITEMSIF[] = [
-    {
-      id: 1,
-      header1: "Jeans / Pants",
-      title: "Autumn Collection",
-      image: "/bannerSlide01.jpg",
-      header2: "durable / stylish / relaxed",
-    },
-    {
-      id: 2,
-      header1: "Hoodies / Sweatshirts",
-      title: "Winter Warmth Essentials",
-      header2: "cozy / layered / trendy",
-      image: "/bannerSlide02.jpg",
-    },
-    {
-      id: 3,
-      header1: "Dresses / Skirts",
-      title: "Spring Blossom Fashion",
-      header2: "floral / elegant / breezy",
-      image: "/bannerSlide03.jpg",
-    },
-    {
-      id: 4,
-      header1: "Jackets / Coats",
-      title: "Rainy Day Specials",
-      header2: "waterproof / warm / modern",
-      image: "/bannerSlide04.jpg",
-    },
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +51,7 @@ export default function Hero() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [bannerItmes]);
+  }, []);
 
   const nextClickHandler = () => {
     if (currentIndex === bannerItmes.length - 1) {
