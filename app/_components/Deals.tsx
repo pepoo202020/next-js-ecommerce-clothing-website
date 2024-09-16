@@ -33,13 +33,11 @@ export default function Deals() {
   return (
     <div
       className="
-        mt-32
-        mb-24
+        my-10
         max-w-[1239px]
         mx-auto
         flex
         items-center
-        
         justify-center
         gap-7
     "
