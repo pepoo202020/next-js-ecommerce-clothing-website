@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Heart, Search, ShoppingCart, User } from "lucide-react";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface MENUITMES {
   id: number;
@@ -44,7 +46,9 @@ export default function Header() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const cartItems: number = 0;
-  const lovedItems: number = 0;
+  const favoriteCount = useSelector(
+    (state: RootState) => state.favorites.favoriteIDs.length
+  );
 
   const searchClickHandler = () => {
     if (!searchInput) {
@@ -55,37 +59,45 @@ export default function Header() {
   };
   return (
     <div
-      className="
+      className="sticky
+        top-0
+        bg-white
+        z-[10000]
+        w-full"
+    >
+      <div
+        className="
         py-8
         max-w-7xl
         mx-auto
         flex
         items-center
         justify-between
+        
     "
-    >
-      {/*LOGO IMAGE*/}
-      <Link href={"/"}>
-        <Image src="/logo.png" alt="logo" width={91.16} height={45} />
-      </Link>
-      {/*NAVIGATION LINKS*/}
-      <nav
-        className="
+      >
+        {/*LOGO IMAGE*/}
+        <Link href={"/"}>
+          <Image src="/logo.png" alt="logo" width={91.16} height={45} />
+        </Link>
+        {/*NAVIGATION LINKS*/}
+        <nav
+          className="
         flex
         items-center
         gap-10
       "
-      >
-        {menuItems.map((item) => (
-          <Link key={item.id} href={item.path}>
-            {item.name}
-          </Link>
-        ))}
-      </nav>
+        >
+          {menuItems.map((item) => (
+            <Link key={item.id} href={item.path}>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
 
-      {/*SEARCH BAR*/}
-      <div
-        className="
+        {/*SEARCH BAR*/}
+        <div
+          className="
         w-64
         bg-[#F6F6F6]
         rounded-3xl
@@ -95,24 +107,24 @@ export default function Header() {
         flex
         itmes-center
       "
-      >
-        <input
-          ref={searchInputRef}
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search"
-          type="text"
-          className="
+        >
+          <input
+            ref={searchInputRef}
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search"
+            type="text"
+            className="
                 w-full
                 h-full
                 pl-12
                 bg-transparent
                 focus:outline-none
             "
-        />
-        <Search
-          onClick={searchClickHandler}
-          className="
+          />
+          <Search
+            onClick={searchClickHandler}
+            className="
             absolute
             top-1/2
             -translate-y-1/2
@@ -120,85 +132,88 @@ export default function Header() {
             cursor-pointer
             text-[#807D7E]
         "
-          size={20}
-        />
-      </div>
+            size={20}
+          />
+        </div>
 
-      {/*ICONS*/}
-      <div
-        className="
+        {/*ICONS*/}
+        <div
+          className="
         flex
         items-center
         gap-3
       "
-      >
-        <div
-          className="
+        >
+          <div
+            className="
             bg-[#F6F6F6]
             p-3
             rounded-xl
             cursor-pointer
             relative
         "
-        >
-          <Heart
-            size={15}
-            className={`
-                    bg-[#F6F6F6]
-                    ${lovedItems > 0 ? "text-red-800" : ""}
-                `}
-          />
-          {lovedItems > 0 && (
-            <div
-              className="
+          >
+            <Heart
+              size={15}
+              fill={`${favoriteCount > 0 ? "red" : "transparent"}`}
+              className="bg-[#F6F6F6]"
+            />
+            {favoriteCount > 0 && (
+              <div
+                className="
             absolute
-            top-1/2
-            -translate-y-1/2
-            left-1/2
-            -translate-x-1/2
-            text-[8px]
+            top-0
+            right-0
             pb-[1px]
+            w-5
+            h-5
+            text-xs
+            bg-red-500
             font-bold
-            text-red-700
+            text-white
+            rounded-full
+            flex
+            items-center
+            justify-center
           "
-            >
-              {lovedItems}
-            </div>
-          )}
-        </div>
-        <div
-          className="
+              >
+                {favoriteCount}
+              </div>
+            )}
+          </div>
+          <div
+            className="
          bg-[#F6F6F6]
          p-3
          rounded-xl
          cursor-pointer
      "
-        >
-          <User
-            size={15}
-            className="
+          >
+            <User
+              size={15}
+              className="
         bg-[#F6F6F6]
     "
-          />
-        </div>
-        <div
-          className="
+            />
+          </div>
+          <div
+            className="
             bg-[#F6F6F6]
             p-3
             rounded-xl
             cursor-pointer
             relative
         "
-        >
-          <ShoppingCart
-            size={15}
-            className="
+          >
+            <ShoppingCart
+              size={15}
+              className="
          bg-[#F6F6F6]
      "
-          />
-          {cartItems > 0 && (
-            <div
-              className="
+            />
+            {cartItems > 0 && (
+              <div
+                className="
             absolute
             top-0
             right-0
@@ -213,10 +228,11 @@ export default function Header() {
             h-5
             rounded-full
           "
-            >
-              {cartItems}
-            </div>
-          )}
+              >
+                {cartItems}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
