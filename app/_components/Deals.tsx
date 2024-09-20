@@ -39,15 +39,19 @@ export default function Deals() {
         flex
         items-center
         justify-center
-        gap-7
+        flex-wrap
+        md:gap-7
+        gap-5
     "
     >
       {dealsItmes.map((item: DEALSITEMSIF) => (
         <div
           key={item.id}
           className="
-                    w-[605px]
-                    h-80
+                    md:mx-0
+                    mx-5
+                    md:w-[605px]
+                    md:h-80
                     relative
                     rounded-xl
                     overflow-hidden
@@ -62,18 +66,27 @@ export default function Deals() {
           />
           <div
             className="
-            absolute
-            top-1/2
-            -translate-y-1/2
-            left-5
-            text-white
-            max-w-[264px]
-          "
+                absolute
+                top-1/2
+                -translate-y-1/2
+                md:left-5
+                left-2
+                text-white
+                md:max-w-[264px]
+                w-full
+              "
           >
-            <h3 className="text-lg font-semibold mb-6">{item.header1}</h3>
-            <h1 className="text-3xl font-extrabold mb-2">{item.title}</h1>
-            <p className="font-medium mb-10">{item.header2}</p>
-            <Link href={item.path} className="underline text-xl font-extrabold">
+            <h3 className="md:text-lg text-xs font-semibold md:mb-6 mb-2">
+              {item.header1}
+            </h3>
+            <h1 className="md:text-3xl text-xl font-extrabold mb-2">
+              {item.title}
+            </h1>
+            <p className="font-medium md:mb-10 mb-2">{item.header2}</p>
+            <Link
+              href={item.path}
+              className="underline md:text-xl text-xs font-extrabold"
+            >
               Explore Items
             </Link>
           </div>

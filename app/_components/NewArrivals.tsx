@@ -3,7 +3,7 @@
 import { MoveLeft, MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface NEWARRIVALSITMESIF {
   id: number;
@@ -65,9 +65,31 @@ const newArrivalsItems: NEWARRIVALSITMESIF[] = [
 
 export default function NewArrivals() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(4);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerPage(2); // Show 2 items for small screens
+      } else {
+        setItemsPerPage(4); // Show 4 items for larger screens
+      }
+    };
+
+    // Set initial value
+    updateItemsPerPage();
+
+    // Add event listener to handle resize
+    window.addEventListener("resize", updateItemsPerPage);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", updateItemsPerPage);
+    };
+  });
 
   const nextClickHandler = () => {
-    if (currentIndex + 4 === newArrivalsItems.length) {
+    if (currentIndex + itemsPerPage === newArrivalsItems.length) {
       return;
     } else {
       setCurrentIndex(currentIndex + 1);
@@ -85,15 +107,16 @@ export default function NewArrivals() {
   return (
     <div
       className="
-        max-w-[1239px]
-        mx-auto
+        mx-5
+        md:max-w-[1239px]
+        md:mx-auto
         mb-10
     "
     >
       <div
         className="
             flex
-            items-center
+            items-center           
             gap-5
             mb-10
         "
@@ -108,7 +131,8 @@ export default function NewArrivals() {
         ></div>
         <h1
           className="
-            text-3xl
+            text-xl
+            md:text-3xl
             font-bold
         "
         >
@@ -129,20 +153,20 @@ export default function NewArrivals() {
         />
         <div
           className="
-            grid grid-cols-4
-            w-full 
+            grid md:grid-cols-4 grid-cols-2
+            w-full  gap-4
         "
         >
           {newArrivalsItems
-            .slice(currentIndex, currentIndex + 4)
+            .slice(currentIndex, currentIndex + itemsPerPage)
             .map((item: NEWARRIVALSITMESIF) => (
               <div
                 className="
                     flex
                     flex-col
                     items-center
-                    gap-8
-                    
+                    md:gap-8
+                    gap-4
                     overflow-hidden
                 "
                 key={item.id}
@@ -154,7 +178,7 @@ export default function NewArrivals() {
                   height={263}
                   className="w-64 h-64 object-cover rounded-2xl drop-shadow-lg"
                 />
-                <Link href={item.path} className="text-xl font-bold">
+                <Link href={item.path} className="md:text-xl text-sm font-bold">
                   {item.title}
                 </Link>
               </div>

@@ -80,19 +80,19 @@ export default function Hero() {
         alt="banner image"
         width={1449}
         height={200}
-        className="w-screen h-[716px]"
+        className="w-screen md:h-[716px] h-[358px]"
       />
       <ChevronLeft
         className={`
-            absolute
-        top-1/2
-        -translate-y-1/2
-        left-5
-        ${
-          currentIndex === 0
-            ? "text-white/60 cursor-auto"
-            : "text-white cursor-pointer"
-        }
+              absolute
+              top-1/2
+              -translate-y-1/2
+              left-5
+              ${
+                currentIndex === 0
+                  ? "text-white/60 cursor-auto"
+                  : "text-white cursor-pointer"
+              }
             `}
         size={44}
         onClick={prevClickHandler}
@@ -146,35 +146,47 @@ export default function Hero() {
             absolute
             top-1/2
             -translate-y-1/2
-            left-48
+            left-1/2
+            -translate-x-1/2
+            md:left-48
             text-white
+            md:flex
+            md:flex-col
+            md:items-center
+            md:justify-center
         "
       >
         <h2
           className="
-            text-3xl
+            text-xl
+            md:text-3xl
             font-medium
             leading-10
-            mb-10
+            md:mb-10
+            mb-5
         "
         >
           {bannerItmes[currentIndex].header1}
         </h2>
         <h1
           className="
-            text-6xl
+            text-2xl
+            md:text-6xl
             font-bold
-            mb-10
-            max-w-[439px]
+            md:mb-10
+            mb-2
+            md:max-w-[439px]
         "
         >
           {bannerItmes[currentIndex].title}
         </h1>
         <p
           className="
-                text-3xl
+                text-xs
+                md:text-3xl
                 font-medium
-                mb-10
+                md:mb-10
+                mb-5
             "
         >
           {bannerItmes[currentIndex].header2}
@@ -182,12 +194,14 @@ export default function Hero() {
         <Link
           href="/shop"
           className="
-            text-xl
+            text-ms
+            md:text-xl
             bg-white
             text-black
             font-bold
-            px-16
-            py-4
+            md:px-16
+            px-4
+            py-2
             rounded-2xl
         "
         >

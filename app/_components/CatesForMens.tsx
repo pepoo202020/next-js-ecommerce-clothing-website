@@ -55,9 +55,10 @@ export default function CatesForMens() {
   return (
     <div
       className="
-    max-w-[1239px]
-    mx-auto
-    mb-10
+        mx-5
+        md:max-w-[1239px]
+        md:mx-auto
+        mb-10
 "
     >
       <div
@@ -78,17 +79,18 @@ export default function CatesForMens() {
         ></div>
         <h1
           className="
-        text-3xl
+        text-xl
+        md:text-3xl
         font-bold
     "
         >
           Categories For Men
         </h1>
       </div>
-      <div className="grid grid-cols-4  gap-12">
+      <div className="md:grid md:grid-cols-4 flex items-center justify-center flex-wrap w-full gap-5  md:gap-12">
         {mensCategoriesItmes.map((item: MENSCATEGORIESIF) => (
           <div
-            className="flex flex-col items-start gap-4 w-64 mb-10"
+            className="flex flex-col items-start gap-4 w-64 md:mb-10 mb-2"
             key={item.id}
           >
             <Image

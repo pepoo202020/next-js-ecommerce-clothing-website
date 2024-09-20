@@ -53,12 +53,34 @@ const brandsItems: BRANDSITEMIF[] = [
 
 export default function Brands() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerPage(3); // Show 2 items for small screens
+      } else {
+        setItemsPerPage(5); // Show 4 items for larger screens
+      }
+    };
+
+    // Set initial value
+    updateItemsPerPage();
+
+    // Add event listener to handle resize
+    window.addEventListener("resize", updateItemsPerPage);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", updateItemsPerPage);
+    };
+  });
 
   useEffect(() => {
     const brandsIn = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         let nextIndex = 0;
-        if (prevIndex + 5 !== brandsItems.length) {
+        if (prevIndex + itemsPerPage !== brandsItems.length) {
           nextIndex = (prevIndex + 1) % brandsItems.length;
         } else {
           nextIndex = 0;
@@ -69,12 +91,12 @@ export default function Brands() {
 
     // Clear the interval on component unmount
     return () => clearInterval(brandsIn);
-  }, []);
+  }, [itemsPerPage]);
   return (
     <div
       className="
-        max-w-[1239px]
-        mx-auto
+        md:max-w-[1239px]
+        md:mx-auto
         mb-10
         bg-[#3C4242]
         text-white
@@ -85,25 +107,33 @@ export default function Brands() {
         items-center
         justify-center
         py-10
+        mx-5
     "
     >
-      <h1 className="text-5xl font-black mb-6">Top Brand Deals</h1>
-      <p className="text-xl font-medium mb-16">
+      <h1 className="text-2xl md:text-5xl font-black md:mb-6 mb-2">
+        Top Brand Deals
+      </h1>
+      <p className="text-sm md:text-xl font-medium md:mb-16 mb-8">
         Up To <span className="text-[#FBD103] font-bold">60%</span> off on
         brands
       </p>
-      <div className="max-w-[985px] grid grid-cols-5 gap-5 justify-center">
-        {brandsItems.slice(currentIndex, currentIndex + 5).map((item) => (
-          <div key={item.id} className="bg-white w-[177px] h-[85px] rounded-lg">
-            <Image
-              src={item.logo}
-              alt={`Brand Logo ${item.id}`}
-              width={177}
-              height={85}
-              className="w-full h-full object-contain"
-            />
-          </div>
-        ))}
+      <div className="md:max-w-[985px] w-full md:px-0 px-5 grid md:grid-cols-5 grid-cols-3 gap-5 justify-center">
+        {brandsItems
+          .slice(currentIndex, currentIndex + itemsPerPage)
+          .map((item) => (
+            <div
+              key={item.id}
+              className="bg-white md:w-[177px]  h-[85px] rounded-lg"
+            >
+              <Image
+                src={item.logo}
+                alt={`Brand Logo ${item.id}`}
+                width={177}
+                height={85}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          ))}
       </div>
     </div>
   );

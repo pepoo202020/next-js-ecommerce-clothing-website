@@ -20,9 +20,10 @@ export default function InTheLimeLight() {
   return (
     <div
       className="
-  max-w-[1239px]
-  mx-auto
-  mb-10
+  mx-5
+        md:max-w-[1239px]
+        md:mx-auto
+        mb-10
 "
     >
       <div
@@ -43,14 +44,15 @@ export default function InTheLimeLight() {
         ></div>
         <h1
           className="
-        text-3xl
+          text-xl
+        md:text-3xl
         font-bold
     "
         >
           In The Limelight
         </h1>
       </div>
-      <div className="grid grid-cols-4 gap-12">
+      <div className="md:rid md:grid-cols-4 md:gap-12 flex items-center justify-center flex-wrap ga-6">
         {products.slice(0, 4).map((item: PRODUCTSIF) => (
           <div
             className="flex flex-col items-start gap-4 w-64 mb-10"
