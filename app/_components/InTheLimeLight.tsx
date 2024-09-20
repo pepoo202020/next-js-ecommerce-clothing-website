@@ -1,5 +1,5 @@
 "use client";
-import { products } from "@/data/products";
+import { products, PRODUCTSIF } from "@/data/products";
 import { toggleFav } from "@/store/slices/favSlice";
 import { RootState } from "@/store/store";
 import { HeartIcon, HeartOffIcon } from "lucide-react";
@@ -51,7 +51,7 @@ export default function InTheLimeLight() {
         </h1>
       </div>
       <div className="grid grid-cols-4 gap-12">
-        {products.slice(0, 4).map((item) => (
+        {products.slice(0, 4).map((item: PRODUCTSIF) => (
           <div
             className="flex flex-col items-start gap-4 w-64 mb-10"
             key={item.id}

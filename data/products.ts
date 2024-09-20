@@ -1,4 +1,4 @@
-interface PRODUCTSIF {
+export interface PRODUCTSIF {
   id: number;
   title: string;
   category: string;
@@ -17,7 +17,7 @@ interface PRODUCTSIF {
   feature?: string;
 }
 
-interface COMMENTSIF {
+export interface COMMENTSIF {
   id: number;
   image?: string;
   name?: string;
@@ -26,19 +26,19 @@ interface COMMENTSIF {
   body: string;
 }
 
-interface PRODUCTDETAILSIF {
+export interface PRODUCTDETAILSIF {
   id: number;
   title: string;
   value: string | number;
 }
 
-interface COLORIF {
+export interface COLORIF {
   id: number;
   color: string;
   hexCode: string;
 }
 
-interface SHIPPINGIF {
+export interface SHIPPINGIF {
   country: string;
   cost: number;
 }
