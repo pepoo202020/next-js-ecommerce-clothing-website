@@ -9,6 +9,7 @@ import {
   Twitter,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 interface FOOTERELEMENTSIF {
@@ -106,67 +107,72 @@ const socialIcons: SOCIALICONIF[] = [
 
 export default function Footer() {
   const [catesState, setCatesState] = useState<boolean>(false);
+  const path = usePathname();
   const popularCates = products.reduce<string[]>(
     (acc, cate) => acc.concat(cate.subCategory),
     []
   );
   const filteredCates = Array.from(new Set(popularCates));
-  return (
-    <div className="bg-[#2A2F2F] text-white">
-      <div className=" lg:max-w-[1239px] lg:mx-auto mx-5 py-10 ">
-        <div className=" lg:max-w-[1239px] w-full lg:mx-auto flex lg:flex-row flex-col lg:items-start items-center lg:justify-between justify-center">
-          {footerElements.map((elemnt: FOOTERELEMENTSIF) => (
-            <div
-              key={elemnt.id}
-              className="mb-6 w-full lg:text-start text-center"
-            >
-              <h1 className="font-bold text-2xl mb-4 ">{elemnt.title}</h1>
-              <div className="flex flex-col lg:items-start items-center justify-start gap-1">
-                {elemnt.elements.map((e: FOOTERLINKSIF) => (
-                  <Link className="text-[#F6F6F6]" key={e.id} href={e.path}>
-                    {e.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="w-full flex items-center justify-between mb-12">
-          <div className="flex items-center lg:justify-start justify-center w-full gap-2">
-            {socialIcons.map((social: SOCIALICONIF) => (
-              <Link
-                key={social.id}
-                href={social.path}
-                className="bg-white p-3 rounded-lg"
+
+  if (path !== "/sign-in" && path !== "/sign-up") {
+    return (
+      <div className="bg-[#2A2F2F] text-white">
+        <div className=" lg:max-w-[1239px] lg:mx-auto mx-5 py-10 ">
+          <div className=" lg:max-w-[1239px] w-full lg:mx-auto flex lg:flex-row flex-col lg:items-start items-center lg:justify-between justify-center">
+            {footerElements.map((elemnt: FOOTERELEMENTSIF) => (
+              <div
+                key={elemnt.id}
+                className="mb-6 w-full lg:text-start text-center"
               >
-                {social.icon}
-              </Link>
+                <h1 className="font-bold text-2xl mb-4 ">{elemnt.title}</h1>
+                <div className="flex flex-col lg:items-start items-center justify-start gap-1">
+                  {elemnt.elements.map((e: FOOTERLINKSIF) => (
+                    <Link className="text-[#F6F6F6]" key={e.id} href={e.path}>
+                      {e.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-        <div
-          className="py-8 border-y-2 border-white px-5  cursor-pointer"
-          onClick={() => setCatesState((pre) => !pre)}
-        >
-          <div className="w-full flex items-center justify-between">
-            <h1 className="font-bold text-2xl ">Popular Categories</h1>
-            {catesState ? <ChevronDown size={25} /> : <ChevronUp size={25} />}
-          </div>
-          {catesState && (
-            <div className="flex flex-col items-start justify-start mt-5 gap-3 mx-5">
-              {filteredCates.map((cate) => (
-                <Link key={cate} href={`/${cate.toLowerCase()}`}>
-                  {cate}
+          <div className="w-full flex items-center justify-between mb-12">
+            <div className="flex items-center lg:justify-start justify-center w-full gap-2">
+              {socialIcons.map((social: SOCIALICONIF) => (
+                <Link
+                  key={social.id}
+                  href={social.path}
+                  className="bg-white p-3 rounded-lg"
+                >
+                  {social.icon}
                 </Link>
               ))}
             </div>
-          )}
-        </div>
-        <div className="text-center mt-5">
-          Copyright @ {new Date().getFullYear()} Eupharia Folks PvtLtd. All
-          Rights Reserved
+          </div>
+          <div
+            className="py-8 border-y-2 border-white px-5  cursor-pointer"
+            onClick={() => setCatesState((pre) => !pre)}
+          >
+            <div className="w-full flex items-center justify-between">
+              <h1 className="font-bold text-2xl ">Popular Categories</h1>
+              {catesState ? <ChevronDown size={25} /> : <ChevronUp size={25} />}
+            </div>
+            {catesState && (
+              <div className="flex flex-col items-start justify-start mt-5 gap-3 mx-5">
+                {filteredCates.map((cate) => (
+                  <Link key={cate} href={`/${cate.toLowerCase()}`}>
+                    {cate}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="text-center mt-5">
+            Copyright @ {new Date().getFullYear()} Eupharia Folks PvtLtd. All
+            Rights Reserved
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <></>;
 }
