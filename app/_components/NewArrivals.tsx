@@ -69,7 +69,7 @@ export default function NewArrivals() {
 
   useEffect(() => {
     const updateItemsPerPage = () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 1054) {
         setItemsPerPage(2); // Show 2 items for small screens
       } else {
         setItemsPerPage(4); // Show 4 items for larger screens
@@ -108,8 +108,9 @@ export default function NewArrivals() {
     <div
       className="
         mx-5
-        md:max-w-[1239px]
-        md:mx-auto
+        lg:max-w-[1239px]
+        max-w-full
+        lg:mx-auto
         mb-10
     "
     >
@@ -132,7 +133,7 @@ export default function NewArrivals() {
         <h1
           className="
             text-xl
-            md:text-3xl
+            lg:text-3xl
             font-bold
         "
         >
@@ -153,8 +154,8 @@ export default function NewArrivals() {
         />
         <div
           className="
-            grid md:grid-cols-4 grid-cols-2
-            w-full  gap-4
+            lg:grid lg:grid-cols-4 
+            w-full  gap-4 flex items-center justify-center
         "
         >
           {newArrivalsItems

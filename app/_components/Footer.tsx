@@ -113,12 +113,15 @@ export default function Footer() {
   const filteredCates = Array.from(new Set(popularCates));
   return (
     <div className="bg-[#2A2F2F] text-white">
-      <div className=" md:max-w-[1239px] md:mx-auto mx-5 py-10 ">
-        <div className=" md:max-w-[1239px] w-full md:mx-auto flex md:flex-row flex-col md:items-start items-center md:justify-between justify-center">
+      <div className=" lg:max-w-[1239px] lg:mx-auto mx-5 py-10 ">
+        <div className=" lg:max-w-[1239px] w-full lg:mx-auto flex lg:flex-row flex-col lg:items-start items-center lg:justify-between justify-center">
           {footerElements.map((elemnt: FOOTERELEMENTSIF) => (
-            <div key={elemnt.id} className="mb-6 text-center">
-              <h1 className="font-bold text-2xl mb-4">{elemnt.title}</h1>
-              <div className="flex flex-col md:items-start items-center justify-start gap-1">
+            <div
+              key={elemnt.id}
+              className="mb-6 w-full lg:text-start text-center"
+            >
+              <h1 className="font-bold text-2xl mb-4 ">{elemnt.title}</h1>
+              <div className="flex flex-col lg:items-start items-center justify-start gap-1">
                 {elemnt.elements.map((e: FOOTERLINKSIF) => (
                   <Link className="text-[#F6F6F6]" key={e.id} href={e.path}>
                     {e.name}
@@ -129,7 +132,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="w-full flex items-center justify-between mb-12">
-          <div className="flex items-center md:justify-start justify-center w-full gap-2">
+          <div className="flex items-center lg:justify-start justify-center w-full gap-2">
             {socialIcons.map((social: SOCIALICONIF) => (
               <Link
                 key={social.id}

@@ -20,10 +20,11 @@ export default function InTheLimeLight() {
   return (
     <div
       className="
-  mx-5
-        md:max-w-[1239px]
-        md:mx-auto
+        mx-5
+        lg:max-w-[1239px]
+        lg:mx-auto
         mb-10
+        max-w-full
 "
     >
       <div
@@ -45,7 +46,7 @@ export default function InTheLimeLight() {
         <h1
           className="
           text-xl
-        md:text-3xl
+        lg:text-3xl
         font-bold
     "
         >

@@ -13,9 +13,10 @@ export default function Feedback() {
     <div
       className="
         mx-5
-        md:max-w-[1239px]
-        md:mx-auto
+        lg:max-w-[1239px]
+        lg:mx-auto
         mb-10
+        max-w-full
       "
     >
       <div
@@ -37,18 +38,18 @@ export default function Feedback() {
         <h1
           className="
           text-xl
-        md:text-3xl
+        lg:text-3xl
         font-bold
     "
         >
           Feedback
         </h1>
       </div>
-      <div className="md:grid md:grid-cols-3 md:gap-6 flex items-center justify-center flex-wrap gap-3">
+      <div className="lg:grid lg:grid-cols-3 lg:gap-6 w-full  flex items-start justify-center flex-wrap gap-3">
         {displayedComments.map((comment: COMMENTSIF) => (
           <div
             key={comment.title}
-            className="md:w-[396px] rounded-xl border-2 border-[#BEBCBD] relative p-6"
+            className="w-[396px]   rounded-xl border-2  border-[#BEBCBD] relative p-6"
           >
             <Image
               src={comment.image ? comment.image : "/person.png"}

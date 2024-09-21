@@ -57,7 +57,7 @@ export default function Brands() {
 
   useEffect(() => {
     const updateItemsPerPage = () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 1054) {
         setItemsPerPage(3); // Show 2 items for small screens
       } else {
         setItemsPerPage(5); // Show 4 items for larger screens
@@ -95,8 +95,9 @@ export default function Brands() {
   return (
     <div
       className="
-        md:max-w-[1239px]
-        md:mx-auto
+        lg:max-w-[1239px]
+        max-w-full
+        lg:mx-auto
         mb-10
         bg-[#3C4242]
         text-white
@@ -110,20 +111,20 @@ export default function Brands() {
         mx-5
     "
     >
-      <h1 className="text-2xl md:text-5xl font-black md:mb-6 mb-2">
+      <h1 className="text-2xl lg:text-5xl font-black lg:mb-6 mb-2">
         Top Brand Deals
       </h1>
-      <p className="text-sm md:text-xl font-medium md:mb-16 mb-8">
+      <p className="text-sm lg:text-xl font-medium lg:mb-16 mb-8">
         Up To <span className="text-[#FBD103] font-bold">60%</span> off on
         brands
       </p>
-      <div className="md:max-w-[985px] w-full md:px-0 px-5 grid md:grid-cols-5 grid-cols-3 gap-5 justify-center">
+      <div className="lg:max-w-[985px] w-full lg:px-0 px-5 lg:grid lg:grid-cols-5 grid-cols-3 gap-5 flex justify-center items-center flex-wrap">
         {brandsItems
           .slice(currentIndex, currentIndex + itemsPerPage)
           .map((item) => (
             <div
               key={item.id}
-              className="bg-white md:w-[177px]  h-[85px] rounded-lg"
+              className="bg-white lg:w-[177px]  h-[85px] rounded-lg"
             >
               <Image
                 src={item.logo}

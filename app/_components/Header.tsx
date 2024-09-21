@@ -70,13 +70,14 @@ export default function Header() {
         <div
           className="
         py-8
-        md:max-w-7xl
+        lg:max-w-7xl
+        max-w-full
         mx-auto
         flex
         items-center
         justify-between
         px-5
-        md:px-0
+        lg:px-0
     "
         >
           {/*LOGO IMAGE*/}

@@ -149,11 +149,14 @@ export default function Hero() {
             left-1/2
             -translate-x-1/2
             md:left-48
+            md:translate-x-0
             text-white
-            md:flex
-            md:flex-col
-            md:items-center
-            md:justify-center
+            flex
+            flex-col
+            items-center
+            justify-center
+            md:items-start
+            md:justify-start
         "
       >
         <h2
@@ -176,6 +179,8 @@ export default function Hero() {
             md:mb-10
             mb-2
             md:max-w-[439px]
+            text-center
+            md:text-start
         "
         >
           {bannerItmes[currentIndex].title}
